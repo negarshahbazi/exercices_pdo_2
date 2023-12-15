@@ -34,7 +34,7 @@
                         <a class="nav-link "  href="./index1.php" >modifier</a>
                     </li>
                     <li class="nav-item">
-          <a class="nav-link " href="./ajout-rendezvous.php" >ajouter rendezvouz</a>
+          <a class="nav-link " href="./ajout-rendezvous.php">ajouter rendezvouz</a>
         </li>
                 </ul>
                 <form class="d-flex" role="search">
@@ -44,20 +44,24 @@
             </div>
         </div>
     </nav>
-
-
-  <h2 class="text-center text-danger mt-4">AJOUTER PATIENT:</h2>  
     <div class=" d-flex justify-content-center text-center align-items-center mt-5">
     <div class="form card w-50 d-flex justify-content-center text-center bg-light">
+    <form action="./verifier.modifier.php" method="post" class="w-100 d-flex flex-column justify-content-center">
+    <?php
+        $id=$_GET['id'];
+        // var_dump($id);
+        require_once('./connexion_database.php');
+        $request = $database->query('SELECT * FROM patients WHERE id='.$id);
+        $patient=$request->fetch();?>
+      
 
+        <input type="hidden" name="id"  value="<?php echo $patient['id']?>">
 
-        <form action="./verifier.php" method="post" class="w-100 d-flex flex-column justify-content-center">
-
-            <input class="  hover border border-danger m-2" type="text" name="lastname" placeholder=" lastname: "><br>
-            <input class="  hover  border border-danger m-2" type="text" name="firstname" placeholder="  firstname: "><br>
-            <input class="  hover  border border-danger m-2" type="date" name="birthdate" placeholder="   birthdate:  "><br>
-            <input class="  hover border border-danger m-2" type="e-mail" name="mail" placeholder=" mail:"><br>
-            <input class="  hover  border border-danger m-2 bg-success text-light" type="submit" name="submit"><br>
+            <input class="hover border border-danger m-2" type="text" name="lastname"  value="<?php echo $patient['lastname']?>"><br>
+            <input class="hover  border border-danger m-2" type="text" name="firstname" value="<?php echo $patient['firstname']?>"><br>
+            <input class="hover  border border-danger m-2" type="date" name="birthdate"  value="<?php echo $patient['birthdate']?>"><br>
+            <input class="hover border border-danger m-2" type="e-mail" name="mail"  value="<?php echo $patient['mail']?>"><br>
+            <input class="hover  border border-danger m-2 bg-success text-light" type="submit" name="submit"><br>
 
 
 
